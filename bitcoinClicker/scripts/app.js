@@ -1,7 +1,8 @@
-const VERSION = "0.0.1"
+const VERSION = "1.0.0"
 var bitcoins = 0
 var bitcoinRate = 0
 
+// Every item in the game
 var items = [
   {
     "name": "item_oldCalculator"
@@ -82,18 +83,40 @@ if(localStorage.getItem("bitcoins") === null){
   bitcoins = parseFloat(localStorage.getItem("bitcoins"))
 
   // Set the text on the page
-  $(".bitcoinAmount").text(bitcoins.toFixed(8))
+  // Rounding the number at specific values
+  if(bitcoins >= 1000){
+    $(".bitcoinAmount").text(bitcoins.toFixed(0))
+  }else if(bitcoins >= 1){
+    $(".bitcoinAmount").text(bitcoins.toFixed(2))
+  }else{
+    $(".bitcoinAmount").text(bitcoins.toFixed(8))
+  }
   $(".satoshiAmount").text(Math.round(bitcoins * 100000000))
 
 }
 
+// Calculates the Bitcoin/sec rate with the amount of every item multiplied with their given Bitcoins/second rate.
 setBitcoinPerSecondRateAtBeginning()
 
+// Stating the interval with the calculated Bitcoin/second rate.
 bSec = setInterval(function () {
   bSecFunction(bitcoinRate);
 }, 1000)
 
 $(document).ready(function () {
+
+  // Write the version into the .version span element
+  $(".version").text("Version " + VERSION)
+
+  // Write the bitcoin per second rate into the .bSecRateNumber span element
+  if(bitcoinRate >= 1000){
+    $(".bSecRateNumber").text(bitcoinRate.toFixed(0))
+  }else if(bitcoinRate >= 1 ){
+    $(".bSecRateNumber").text(bitcoinRate.toFixed(2))
+  }else{
+    $(".bSecRateNumber").text(bitcoinRate.toFixed(8))
+  }
+
 
   // If clicked on the big Bitcoin
   $(".bitcoin").click(function () {
@@ -102,7 +125,13 @@ $(document).ready(function () {
     bitcoins = bitcoins + 0.00000001
 
     // Show the new number on the page
-    $(".bitcoinAmount").text(bitcoins.toFixed(8))
+    if(bitcoins >= 1000){
+      $(".bitcoinAmount").text(bitcoins.toFixed(0))
+    }else if(bitcoins >= 1){
+      $(".bitcoinAmount").text(bitcoins.toFixed(2))
+    }else{
+      $(".bitcoinAmount").text(bitcoins.toFixed(8))
+    }
     $(".satoshiAmount").text(Math.round(bitcoins * 100000000))
 
     // Save the new amount of Bitcoins in the localStorage storage
@@ -122,9 +151,9 @@ $(document).ready(function () {
     var amountDisplayAmount = parseInt(amountDisplay.textContent)
 
     // If you have enough Bitcoins, it´ll buy one item
-    if(price <= bitcoins){
+    if(bitcoins >= price){
 
-      //
+      // Substract the price from the current Bitcoin number and set it to the bitcoins variable.
       bitcoins = bitcoins - price
 
       // Save the new amount of Bitcoins in the localStorage storage
@@ -135,16 +164,28 @@ $(document).ready(function () {
       amountDisplay.textContent = amountDisplayAmount.toString()
 
       // Changing the Bitcoins amount
-      $(".bitcoinAmount").text(bitcoins.toFixed(8))
+      // Rounding the Bitcoin number at specific values
+      if(bitcoins >= 1000){
+        $(".bitcoinAmount").text(bitcoins.toFixed(0))
+      }else if(bitcoins >= 1){
+        $(".bitcoinAmount").text(bitcoins.toFixed(2))
+      }else{
+        $(".bitcoinAmount").text(bitcoins.toFixed(8))
+      }
+
+      // Calculation the Satoshi amount
       $(".satoshiAmount").text(Math.round(bitcoins * 100000000))
 
-      // Saving everything which has to do with the bought item
+      // Increasing the amount of the specific item
       itemAction(id)
 
-      // "Restart" the function with the new bitcoin rate values
+      // Stops the interval
       stopBsec()
+
+      // Saving the new calculated Bitcoin/second rate in a variable
       var newRate = setNewBitcoinRate(bitcoinsPerSecond)
 
+      // Restarting the interval with the new rate
       bSec = setInterval(function () {
         bSecFunction(newRate);
       }, 1000)
@@ -155,8 +196,11 @@ $(document).ready(function () {
 
 });
 
-
-
+/**
+ * Function to increase the amount of the item (in the localStorage) with the specific identifier.
+ *
+ * @param id - The identifier of the item (the id from the list element)
+ */
 function itemAction(id) {
 
   var item = id
@@ -173,6 +217,10 @@ function itemAction(id) {
 
 }
 
+/**
+ * Calculating the Bitcoins per Second - rate when the page was opened.
+ *
+ */
 function setBitcoinPerSecondRateAtBeginning () {
 
   for(var i = 0; i < items.length; i++){
@@ -195,19 +243,50 @@ function setBitcoinPerSecondRateAtBeginning () {
 
 }
 
+/**
+ * Function which sets a new "Bitcoin per Second" rate
+ *
+ * @param rate - The number which must be added to the current Bitcoin per Second - rate
+ * @returns {Number} - Returning the new Bitcoin per Second - rate
+ */
 function setNewBitcoinRate (rate) {
 
+  // Logging the new Bitcoin per second rate
   console.log("setNewBitcoinRate -> New rate: " + (bitcoinRate + rate).toFixed(8) )
+
+  // Showing the new rate on the page
+  // Rounding at specific values
+  if((bitcoinRate + rate) >= 1000){
+    $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(0))
+  }else if((bitcoinRate + rate) >= 1 ){
+    $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(2))
+  }else{
+    $(".bSecRateNumber").text((bitcoinRate + rate).toFixed(8))
+  }
+
+  // Returning the new rate
   return bitcoinRate = bitcoinRate + rate;
 
 }
 
+/**
+ * The function which adds new generated Bitcoins to the current Bitcoin amount.
+ *
+ * @param rate - The Bitcoin per second rate; Needed for adding the generated Bitcoins every second
+ */
 function bSecFunction (rate) {
 
   bitcoins = bitcoins + rate
 
   // Show both values on the page
-  $(".bitcoinAmount").text(bitcoins.toFixed(8))
+  // Rounding the bitcoin number at specific set values
+  if(bitcoins >= 1000){
+    $(".bitcoinAmount").text(bitcoins.toFixed(0))
+  }else if(bitcoins >= 1){
+    $(".bitcoinAmount").text(bitcoins.toFixed(2))
+  }else{
+    $(".bitcoinAmount").text(bitcoins.toFixed(8))
+  }
   $(".satoshiAmount").text(Math.round(bitcoins * 100000000))
 
   // Save bitcoin amount in the storage
@@ -217,6 +296,9 @@ function bSecFunction (rate) {
 
 }
 
+/**
+ * Stops the B/sec interval.
+ */
 function stopBsec () {
   clearInterval(bSec)
 }

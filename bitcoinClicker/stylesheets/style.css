@@ -14,8 +14,16 @@
     src: url("../fonts/VCR_OSD_MONO.ttf");
 }
 
+/* Body */
+/* Solution for disabling text selection found on StackOverflow:
+https://stackoverflow.com/questions/3779534/how-do-i-disable-text-selection-with-css-or-javascript */
 body{
     background: #ffe09f;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
 }
 
 .gameFullContent{
@@ -29,6 +37,10 @@ body{
     width: calc(100% * 0.3);
 }
 
+.version{
+    font-family: VCR OSD Mono, cursive;
+}
+
 /* Main Container */
 /* THE BITCOIN IMAGE */
 .mainGameContent{
@@ -39,7 +51,7 @@ body{
 /* All items which you can buy */
 .rightContainer{
     width: calc(100% * 0.3);
-    border-left: 4px solid white;
+    border: 4px solid white;
     max-height: 96vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -53,7 +65,16 @@ body{
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
     margin: 20px 0 0 0px;
 }
-.satoshiAmountDisplay{
+.satoshiAmountDisplay {
+    text-align: center;
+    font-family: VCR OSD Mono, cursive;
+    font-size: 15pt;
+    color: white;
+    text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+    padding: 0 !important;
+    margin: 0 0 -15px 0px;
+}
+.bSecRate{
     text-align: center;
     font-family: VCR OSD Mono, cursive;
     font-size: 25pt;
@@ -72,6 +93,7 @@ body{
     top: 18%;
     transition: width 0.2s ease-in-out, top 0.2s ease-in-out;
     animation: rotation 20s linear infinite;
+    border-radius: 500px;
 }
 .bitcoin:hover{
     width: 32%;
