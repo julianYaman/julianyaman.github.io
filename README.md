@@ -1,5 +1,3 @@
-<h1>julianyaman.github.io</h1>
-
 Welcome to this page. For now, it´ll be only a temporary page with all the important links.
 
 <h2>Projects</h2>
@@ -9,7 +7,7 @@ Welcome to this page. For now, it´ll be only a temporary page with all the impo
 <p><b>Repository:</b> coming soon.</p>
 
 <h3> - I Love Radio - Discord Bot | <img src="https://img.shields.io/badge/master--version-1.3.0-brightgreen.svg" /> <a href="https://github.com/julianYaman/iloveradio-discord-bot/releases"><img src="https://img.shields.io/github/release/julianYaman/iloveradio-discord-bot.svg" /></a> </h3>
-<p><b>Repository:</b> https://github.com/julianYaman/iloveradio-discord-bot</p>
+<p><b>Repository:</b> <a href="https://github.com/julianYaman/iloveradio-discord-bot">https://github.com/julianYaman/iloveradio-discord-bot</a></p>
 
 <hr>
 
