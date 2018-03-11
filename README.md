@@ -3,7 +3,7 @@ Welcome to this page. For now, it´ll be only a temporary page with all the impo
 <h2>Projects</h2>
 
 <h3> - Bitcoin Clicker (Version 1.0.0) </h3>
-<p><b><a href="https://julianyaman.github.io/bitcoinClicker">Open here</a></b></p>
+<p><b><a href="https://julianyaman.github.io/bitcoinClicker/index.html">Open here</a></b></p>
 <p><b>Repository:</b> coming soon.</p>
 
 <h3> - I Love Radio - Discord Bot | <img src="https://img.shields.io/badge/master--version-1.3.0-brightgreen.svg" /> <a href="https://github.com/julianYaman/iloveradio-discord-bot/releases"><img src="https://img.shields.io/github/release/julianYaman/iloveradio-discord-bot.svg" /></a> </h3>
