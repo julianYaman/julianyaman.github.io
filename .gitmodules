@@ -1,0 +1,3 @@
+[submodule "bitcoin-clicker"]
+	path = bitcoin-clicker
+	url = https://github.com/julianYaman/bitcoin-clicker
